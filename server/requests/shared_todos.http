@@ -1,0 +1,11 @@
+GET http://localhost:8080/todos/shared_todos/1
+
+###
+
+POST http://localhost:8080/todos/shared_todos
+Content-Type: application/json
+
+{
+    "todo_id": 1,
+    "shared_with_id": 2
+}
