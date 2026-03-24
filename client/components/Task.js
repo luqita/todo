@@ -3,15 +3,15 @@ import { Feather } from "@expo/vector-icons";
 import * as React from 'react';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import SharedTodoModalContent from './SharedTodoModalContent';
+import TodoModalContent from './TodoModalContent';
  
 function CheckMark({  id, completed, toggleTodo }) {
     async function toggle() {
     const response = await fetch(`http://localhost:8080/todos/${id}`, {
+        method: "PUT",
         headers: {
-            "x-api-key": "abcdef123456",
             "Content-Type": "application/json",
         },
-        method: "PUT",
         body: JSON.stringify({
             value: completed ? false : true,
         }),
@@ -97,6 +97,13 @@ export default function Task({
 
               <SharedTodoModalContent id={id} title={title} shared_with_id={shared_with_user_id} completed={completed} />   
             
+            </BottomSheetModal>
+            <BottomSheetModal
+             index ={2}
+             ref={bottomSheetModalRef}
+             snapPoints={snapPoints}
+             backgroundStyle={{borderRadius: 50, borderWidht: 4}}>
+                <TodoModalContent id={id} title={title} />
             </BottomSheetModal>
         </TouchableOpacity>
     );
